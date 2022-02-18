@@ -1,3 +1,14 @@
+/**
+ * @file MAX17043.h
+ * @author Mario Aguilar (fernandoaguilar731010@gmail.com)
+ * @brief 
+ * @version v1
+ * @date 2022-02-18
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
+
 #ifndef MAX17043_H
 #define MAX17043_H
 
@@ -42,8 +53,8 @@
 //NOTA: Flanco ascendente al pin QSTR o escribiendo al 4000h al mode registro 
 
 
-typedef void (*func_write)(uint8_t,void *,uint8_t);
-typedef void (*func_read) (uint8_t,void *,uint8_t);
+typedef void (*func_write)(uint8_t,uint8_t *,uint8_t);
+typedef void (*func_read) (uint8_t,uint8_t *,uint8_t);
 typedef void (*delay1ms)(uint8_t);
 
 typedef struct 
@@ -57,15 +68,15 @@ typedef struct
 
 void max17043Init(max17043_data *obj,func_write func_write_port,func_read func_read_port,delay1ms delay_port );
 void max17043SoftReset(max17043_data *obj);
-uint32_t max17043GetVoltage(max17043_data *obj);
-uint32_t max17043GetBatteryChargePercentage(max17043_data *obj);
-uint32_t max17043GetVersion(max17043_data *obj);
+uint16_t max17043GetVoltage(max17043_data *obj);
+uint16_t max17043GetBatteryChargePercentage(max17043_data *obj);
+uint16_t max17043GetVersion(max17043_data *obj);
 void max17043OpenSleepMode(max17043_data *obj);
 void max17043CloseSleepMode(max17043_data *obj);
 void max17043SetAlertThreshold(max17043_data*obj ,uint8_t percentage);
 void max17043SetAlert(max17043_data*obj);
 void max17043ClearAlert(max17043_data*obj);
-
+uint16_t max17043_get_config(max17043_data *obj);
 
 
 
